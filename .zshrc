@@ -139,3 +139,4 @@ alias update="yay --color auto -Syyu && sudo pacman -Syyu"
 
 
 alias ssh_pi="ssh oliver@192.168.178.70"
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
