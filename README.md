@@ -53,3 +53,27 @@ Um die Interaktion mit dem Bare-Repository zu vereinfachen, verwenden wir einen 
 Erstelle ein Backup-Verzeichnis:
 ```bash
 mkdir -p ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")
+```
+Verschiebe nun alle lokalen Dateien, die mit denen im Repository kollidieren könnten, in dieses Backup-Verzeichnis. Hier sind einige Beispiele (passe diese Liste an, falls du andere wichtige lokale Konfigs hast, die durch das Repository überschrieben würden):
+
+# Beispiel: Shell-Konfigurationen
+```bash
+mv ~/.zshrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/zshrc.backup 2>/dev/null || true
+mv ~/.bashrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/bashrc.backup 2>/dev/null || true
+mv ~/.bash_profile ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/bash_profile.backup 2>/dev/null || true
+mv ~/.bash_logout ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/bash_logout.backup 2>/dev/null || true
+```
+
+# Beispiel: Git-Konfiguration
+```bash
+mv ~/.gitconfig ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/gitconfig.backup 2>/dev/null || true
+```
+
+# Beispiel: KDE/Plasma und andere .config-Dateien (passe dies an deine Repository-Inhalte an!)
+# Es ist oft einfacher, die Fehlermeldung von 'config checkout' abzuwarten (siehe nächster Schritt)
+# und dann gezielt die dort genannten Dateien zu verschieben.
+# Beispielhaft:
+```bash
+# mv ~/.config/kwinrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/kwinrc.backup 2>/dev/null || true
+# mv ~/.config/plasmashellrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/plasmashellrc.backup 2>/dev/null || true
+```
