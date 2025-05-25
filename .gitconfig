@@ -1,0 +1,16 @@
+[user]
+	name = Oliver Schmidt
+	email = ol6095@hs-el.de
+	signingkey = ""
+[credential]
+	helper = store
+[pull]
+	rebase = true
+[core]
+	editor = code
+[commit]
+	gpgsign = false
+[gpg]
+	format = openpgp
+[gpg "openpgp"]
+	program = ""

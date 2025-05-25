@@ -1,0 +1,89 @@
+# Ignoriere alles standardmäßig im Home-Verzeichnis
+*
+
+# --- Ausnahmen für Top-Level Dotfiles, die du behalten willst ---
+!.bash_logout
+!.bash_profile
+!.bashrc
+!.config # Wir wollen den .config Ordner, aber nicht alles darin
+!.gitconfig # Deine globale Git-Konfiguration (aber NICHT .git-credentials!)
+!.gitignore # Die .gitignore-Datei selbst
+!.gtkrc-2.0
+!.oh-my-zsh # Wenn du deine oh-my-zsh Konfiguration sichern willst (sei vorsichtig mit Themes/Plugins, die eigene Repos sind)
+!.shell.pre-oh-my-zsh
+!.zshrc
+!.zshrc.pre-oh-my-zsh
+# Füge hier weitere spezifische Dotfiles aus deinem Home-Verzeichnis hinzu, falls nötig
+
+# --- Spezifische Regeln für den Inhalt von .config ---
+# Ignoriere alles innerhalb von .config standardmäßig
+.config/*
+
+# Erlaube spezifische KDE/Plasma Konfigurationsdateien und -ordner
+!.config/dolphinrc
+!.config/kglobalshortcutsrc
+!.config/kdeglobals
+!.config/konsolerc # Konsole (Terminal) Einstellungen
+!.config/kwinrc # KWin Fenstermanager Einstellungen
+!.config/plasmarc
+!.config/plasmashellrc
+!.config/plasma-org.kde.plasma.desktop-appletsrc # Desktop-Layout, Widgets
+!.config/kcminputrc # Maus/Touchpad
+!.config/kxkbrc # Tastaturlayouts
+# Füge hier weitere spezifische Dateien oder Unterordner aus .config hinzu, die du brauchst
+# z.B. !.config/autostart/ für Autostart-Skripte, die du selbst erstellt hast
+# z.B. !.config/gtk-3.0/settings.ini
+# z.B. !.config/gtk-4.0/settings.ini
+# z.B. !.config/fontconfig/ # wenn du eigene fontconfig-Einstellungen hast
+
+# --- Explizit Dateien und Ordner IGNORIEREN, die du NICHT willst (auch wenn sie oben erlaubt wären) ---
+# Besonders wichtig für sensible Daten und große Ordner!
+.bash_history
+.zsh_history # Kann sensible Befehle enthalten, überlege gut!
+.cache/
+.cargo/
+.cmake/
+.dotnet/
+.gnupg/ # ENTHÄLT PRIVATE SCHLÜSSEL!
+.gradle/
+.hplip/
+.java/
+.local/ # Meistens Anwendungsdaten und Cache, sei sehr selektiv, wenn du etwas hieraus brauchst
+.markdown-reader/
+.MathWorks/
+.matlab/
+'MATLAB Add-Ons'/
+.minecraft/
+.mozilla/ # Enthält Browser-Profile, Passwörter etc.
+.pki/ # Private Schlüssel Infrastruktur
+.platformio/
+.qet/
+slprj/
+.speedgoat/
+.ssh/ # ENTHÄLT PRIVATE SSH-SCHLÜSSEL!
+.steam/
+.var/ # Flatpak Daten etc.
+.vscode/ # Oft besser mit Settings Sync von VSCode selbst
+.vscode-print-resource-cache/
+.wine/
+.yarn/
+.zoom/
+ownCloud/ # Daten, nicht Konfigurationen
+
+# Spezifische sensible oder temporäre Dateien
+.digital.cfg
+.git-credentials # ENTHÄLT GIT PASSWÖRTER/TOKENS!
+.histfile
+.python_hue
+.steampath
+.steampid
+.viminfo # Kann temporäre Daten enthalten
+.wget-hsts
+.zcompdump* # ZSH completion cache
+.yarnrc
+
+# Allgemeine Muster
+*.log
+*~
+*.swp
+*.swo
