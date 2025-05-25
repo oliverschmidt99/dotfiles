@@ -2,78 +2,146 @@
 
 Dieses Repository enthält meine persönlichen Konfigurationsdateien (Dotfiles) für eine konsistente Arbeitsumgebung auf verschiedenen Linux-Systemen, insbesondere für KDE Plasma basierend auf EndeavourOS.
 
-Die Verwaltung erfolgt über ein "Bare" Git-Repository, das im Home-Verzeichnis des Benutzers operiert.
+Die Verwaltung erfolgt über ein *Bare* Git-Repository, das direkt im Home-Verzeichnis (`$HOME`) des Benutzers arbeitet.
+
+---
 
 ## Voraussetzungen
 
-* **Git**: Muss auf dem System installiert sein.
-* **Shell**: Getestet mit Zsh (empfohlen, da meine Konfigurationen darauf ausgelegt sind, z.B. `.zshrc`). Bash wird möglicherweise auch funktionieren, aber einige Shell-spezifische Einstellungen sind für Zsh.
-* **Authentifizierung bei GitHub**:
-    * Für HTTPS-URLs (empfohlen für den ersten Clone, wenn SSH nicht eingerichtet ist): Ein [Personal Access Token (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) mit dem Scope `repo`.
-    * Für SSH-URLs: Ein auf dem lokalen Rechner eingerichtetes SSH-Schlüsselpaar, dessen öffentlicher Schlüssel zu deinem GitHub-Account hinzugefügt wurde.
+- **Git** – muss installiert sein.
+- **Shell** – getestet mit **Zsh** (empfohlen). Bash funktioniert eventuell auch, aber einige Einstellungen sind zsh-spezifisch.
+- **GitHub-Zugriff**:
+  - **HTTPS**: Ein [Personal Access Token (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) mit dem Scope `repo`.
+  - **SSH**: Ein eingerichtetes SSH-Schlüsselpaar, dessen öffentlicher Schlüssel bei GitHub hinterlegt ist.
+
+---
 
 ## Installation auf einem neuen System
 
-Diese Schritte beschreiben, wie du diese Dotfiles auf einem neuen System einrichtest.
+### 1. Repository klonen (als *Bare Repository*)
 
-### 1. Repository klonen (als Bare-Repository)
-
-Wir klonen das Repository als "Bare"-Repository. Das bedeutet, der `.git`-Ordner selbst ist der Klon, und es gibt keinen separaten Arbeitsbaum für das Repository selbst. Wir werden später Git anweisen, dein `$HOME`-Verzeichnis als Arbeitsbaum zu verwenden.
-
-Öffne ein Terminal und wähle **eine** der folgenden Methoden:
-
-* **Mit HTTPS (empfohlen, wenn SSH nicht eingerichtet ist):**
-    ```bash
-    git clone --bare [https://github.com/oliverschmidt99/dotfiles.git](https://github.com/oliverschmidt99/dotfiles.git) $HOME/.dotfiles
-    ```
-    Du wirst nach deinem GitHub-Benutzernamen und einem Passwort gefragt. Gib hier dein **Personal Access Token (PAT)** als Passwort ein.
-
-* **Mit SSH (wenn SSH-Schlüssel eingerichtet sind):**
-    ```bash
-    git clone --bare git@github.com:oliverschmidt99/dotfiles.git $HOME/.dotfiles
-    ```
-
-### 2. Den `config`-Alias einrichten
-
-Um die Interaktion mit dem Bare-Repository zu vereinfachen, verwenden wir einen Alias namens `config`.
-
-* **Temporär für die aktuelle Sitzung (notwendig für die nächsten Schritte):**
-    Definiere den Alias direkt in deiner aktuellen Terminalsitzung:
-    ```bash
-    alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-    ```
-
-* **Permanent:**
-    Die `config`-Alias-Definition sollte bereits Teil deiner `~/.zshrc` (oder `~/.bashrc`) in diesem Repository sein. Sobald die Dateien ausgecheckt sind und du deine Shell neu startest oder die Konfigurationsdatei sourct, wird der Alias permanent verfügbar sein.
-
-### 3. Bestehende lokale Dotfiles sichern
-
-**WICHTIG:** Dieser Schritt ist entscheidend, um den Verlust vorhandener lokaler Konfigurationen auf dem neuen System zu vermeiden!
-
-Erstelle ein Backup-Verzeichnis:
 ```bash
-mkdir -p ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")
-```
-Verschiebe nun alle lokalen Dateien, die mit denen im Repository kollidieren könnten, in dieses Backup-Verzeichnis. Hier sind einige Beispiele (passe diese Liste an, falls du andere wichtige lokale Konfigs hast, die durch das Repository überschrieben würden):
+# Mit HTTPS:
+git clone --bare https://github.com/oliverschmidt99/dotfiles.git $HOME/.dotfiles
 
-# Beispiel: Shell-Konfigurationen
-```bash
-mv ~/.zshrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/zshrc.backup 2>/dev/null || true
-mv ~/.bashrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/bashrc.backup 2>/dev/null || true
-mv ~/.bash_profile ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/bash_profile.backup 2>/dev/null || true
-mv ~/.bash_logout ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/bash_logout.backup 2>/dev/null || true
+# Oder mit SSH:
+git clone --bare git@github.com:oliverschmidt99/dotfiles.git $HOME/.dotfiles
 ```
 
-# Beispiel: Git-Konfiguration
+---
+
+### 2. `config`-Alias einrichten
+
 ```bash
-mv ~/.gitconfig ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/gitconfig.backup 2>/dev/null || true
+# Temporär für die aktuelle Sitzung:
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 ```
 
-# Beispiel: KDE/Plasma und andere .config-Dateien (passe dies an deine Repository-Inhalte an!)
-# Es ist oft einfacher, die Fehlermeldung von 'config checkout' abzuwarten (siehe nächster Schritt)
-# und dann gezielt die dort genannten Dateien zu verschieben.
-# Beispielhaft:
+Die dauerhafte Alias-Definition befindet sich in der ausgecheckten `.zshrc` oder `.bashrc`.
+
+---
+
+### 3. Lokale Dotfiles sichern (vor dem Checkout)
+
 ```bash
-# mv ~/.config/kwinrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/kwinrc.backup 2>/dev/null || true
-# mv ~/.config/plasmashellrc ~/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")/plasmashellrc.backup 2>/dev/null || true
+BACKUP_DIR_FOR_DOTFILES="$HOME/dotfiles_backup_$(date +"%Y%m%d_%H%M%S")"
+mkdir -p "$BACKUP_DIR_FOR_DOTFILES"
+echo "Backup-Verzeichnis erstellt: $BACKUP_DIR_FOR_DOTFILES"
 ```
+
+Beispiel für das Verschieben möglicher Konflikt-Dateien:
+
+```bash
+mv ~/.zshrc "$BACKUP_DIR_FOR_DOTFILES/zshrc.backup" 2>/dev/null || true
+mv ~/.bashrc "$BACKUP_DIR_FOR_DOTFILES/bashrc.backup" 2>/dev/null || true
+mv ~/.bash_profile "$BACKUP_DIR_FOR_DOTFILES/bash_profile.backup" 2>/dev/null || true
+mv ~/.bash_logout "$BACKUP_DIR_FOR_DOTFILES/bash_logout.backup" 2>/dev/null || true
+mv ~/.gitconfig "$BACKUP_DIR_FOR_DOTFILES/gitconfig.backup" 2>/dev/null || true
+```
+
+Optional: KDE- und `.config`-Dateien:
+
+```bash
+mkdir -p "$BACKUP_DIR_FOR_DOTFILES/.config_backup"
+mv ~/.config/kwinrc "$BACKUP_DIR_FOR_DOTFILES/.config_backup/kwinrc" 2>/dev/null || true
+mv ~/.config/plasmashellrc "$BACKUP_DIR_FOR_DOTFILES/.config_backup/plasmashellrc" 2>/dev/null || true
+mv ~/.config/kglobalshortcutsrc "$BACKUP_DIR_FOR_DOTFILES/.config_backup/kglobalshortcutsrc" 2>/dev/null || true
+mv ~/.config/dolphinrc "$BACKUP_DIR_FOR_DOTFILES/.config_backup/dolphinrc" 2>/dev/null || true
+mv ~/.config/konsolerc "$BACKUP_DIR_FOR_DOTFILES/.config_backup/konsolerc" 2>/dev/null || true
+```
+
+---
+
+### 4. Dotfiles auschecken
+
+```bash
+config checkout master
+```
+
+Wenn Konflikte auftreten („unversionierte Dateien würden überschrieben“), verschiebe diese manuell ins Backup (siehe oben) und wiederhole den Befehl.
+
+Optional (nur wenn **sicher**):
+
+```bash
+config checkout -f master
+```
+
+---
+
+### 5. Git-Konfiguration anpassen (empfohlen)
+
+```bash
+config config --local status.showUntrackedFiles no
+```
+
+---
+
+### 6. Abschluss: Shell neu starten oder Konfig laden
+
+```bash
+# Für Zsh:
+source ~/.zshrc
+
+# Für Bash:
+source ~/.bashrc
+```
+
+---
+
+## Dotfiles verwalten
+
+```bash
+# Status anzeigen:
+config status
+
+# Datei hinzufügen:
+config add ~/.pfad/zur/datei
+
+# Änderungen committen:
+config commit -m "Meine Commit-Nachricht"
+
+# Änderungen pushen:
+config push origin master
+
+# Änderungen von GitHub holen:
+config pull origin master
+```
+
+---
+
+## Fehlerbehebung
+
+- `config: command not found`  
+  → Alias nicht definiert? Siehe Schritt 2 und stelle sicher, dass deine Shell-Konfiguration geladen ist.
+
+- Probleme beim Klonen/Pushen über HTTPS  
+  → Stelle sicher, dass du ein gültiges **PAT** verwendest und nicht dein normales Passwort.
+
+- SSH-Authentifizierungsprobleme  
+  → Überprüfe deinen SSH-Schlüssel lokal und bei GitHub (unter `SSH and GPG keys`).
+
+---
+
+## Lizenz
+
+Diese Dotfiles sind auf meine persönliche Umgebung zugeschnitten. Verwende sie gerne als Inspiration, aber übernimm Konfigurationen mit Bedacht.
