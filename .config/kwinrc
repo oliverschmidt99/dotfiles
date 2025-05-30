@@ -45,7 +45,6 @@ desktopchangeosdEnabled=true
 glideEnabled=true
 invertEnabled=true
 magiclampEnabled=true
-mousemarkEnabled=true
 scaleEnabled=false
 slidebackEnabled=true
 squashEnabled=false
@@ -66,10 +65,16 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][58ca410b-ce44-58d6-82b9-fefe44aba0e3]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][597a2de9-1149-5c8e-ac76-4070688ddad9]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][5b7a5ba4-43cc-5910-8e98-f358f9d54b43]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][8d1f7b87-85e2-5b14-8edc-590e6bbe4f01]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][93325e72-72f6-54ba-a29d-7cf2bbe5c34a]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][e2b796fd-18a8-55b1-b0b3-e1e968eea7c6]
