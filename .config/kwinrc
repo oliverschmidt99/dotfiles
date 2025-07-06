@@ -1,5 +1,6 @@
 [Activities][LastVirtualDesktop]
 5eaf5bf9-9f95-43c4-a71b-1ccdbe1adeae=3321c12b-3b2c-4d45-886b-5635c71d4bdc
+c38886ca-8804-4606-b79a-110371cca02e=3321c12b-3b2c-4d45-886b-5635c71d4bdc
 
 [Desktops]
 Id_1=3321c12b-3b2c-4d45-886b-5635c71d4bdc
@@ -25,6 +26,12 @@ OutRotationEdge=0
 [Effect-magiclamp]
 AnimationDuration=150
 
+[Effect-mousemark]
+Freedrawalt=true
+Freedrawcontrol=true
+Freedrawmeta=false
+Freedrawshift=false
+
 [Effect-slide]
 HorizontalGap=180
 VerticalGap=180
@@ -45,6 +52,7 @@ desktopchangeosdEnabled=true
 glideEnabled=true
 invertEnabled=true
 magiclampEnabled=true
+mousemarkEnabled=true
 scaleEnabled=false
 slidebackEnabled=true
 squashEnabled=false
@@ -55,6 +63,9 @@ PopupHideDelay=2000
 
 [Tiling]
 padding=4
+
+[Tiling][3321c12b-3b2c-4d45-886b-5635c71d4bdc][ca37c61b-98e4-410a-bb54-5f1768d87518]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][37b7f8d3-3f10-5112-a26b-de7770f0158a]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
@@ -69,6 +80,15 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][5b7a5ba4-43cc-5910-8e98-f358f9d54b43]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][5bf4f044-ddcc-4658-b72b-3779fdbaaf7c][ca37c61b-98e4-410a-bb54-5f1768d87518]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][6668dbb7-04f1-446f-9435-9bcf29165acc][ca37c61b-98e4-410a-bb54-5f1768d87518]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][7d672cf0-e0cf-5d2e-a8f5-4bfc101b4cae]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][8d1f7b87-85e2-5b14-8edc-590e6bbe4f01]
@@ -88,7 +108,7 @@ ElectricBorderCornerRatio=0.49
 RollOverDesktops=true
 
 [Xwayland]
-Scale=1
+Scale=1.3
 XwaylandEavesdrops=None
 
 [org.kde.kdecoration2]
